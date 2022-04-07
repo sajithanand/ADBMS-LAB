@@ -1,0 +1,119 @@
+EXPERIMENT 1
+
+mysql> ALTER TABLE EMPLOYEE ADD SSN INT FIRST;
+Query OK, 0 rows affected (0.70 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  |     | NULL    |       |
+| EMP_ID   | int(11)     | YES  |     | NULL    |       |
+| NAME     | varchar(40) | YES  |     | NULL    |       |
+| CITY     | varchar(30) | YES  |     | NULL    |       |
+| DOB      | date        | YES  |     | NULL    |       |
+| ADHAR_NO | int(30)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+EXPERIMENT 2
+
+mysql> ALTER TABLE EMPLOYEE MODIFY DOB INT;
+Query OK, 0 rows affected (0.48 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  |     | NULL    |       |
+| EMP_ID   | int(11)     | YES  |     | NULL    |       |
+| NAME     | varchar(40) | YES  |     | NULL    |       |
+| CITY     | varchar(30) | YES  |     | NULL    |       |
+| DOB      | int(11)     | YES  |     | NULL    |       |
+| ADHAR_NO | int(30)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+EXPERIMENT 3
+
+mysql> ALTER TABLE EMPLOYEE DROP EMP_ID;
+Query OK, 0 rows affected (0.31 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  |     | NULL    |       |
+| NAME     | varchar(40) | YES  |     | NULL    |       |
+| CITY     | varchar(30) | YES  |     | NULL    |       |
+| DOB      | int(11)     | YES  |     | NULL    |       |
+| ADHAR_NO | int(30)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+EXPERIMENT 4
+
+mysql> ALTER TABLE EMPLOYEE ADD CONSTRAINT UNIQUE(SSN,ADHAR_NO);
+Query OK, 0 rows affected (0.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEE;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  | MUL | NULL    |       |
+| NAME     | varchar(40) | YES  |     | NULL    |       |
+| CITY     | varchar(30) | YES  |     | NULL    |       |
+| DOB      | int(11)     | YES  |     | NULL    |       |
+| ADHAR_NO | int(30)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+EXPERIMENT 5
+
+mysql> ALTER TABLE STUDENT MODIFY AGE INT NULL;
+Query OK, 0 rows affected (0.32 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC STUDENT;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ROLL_NO | int(11)     | NO   | PRI | NULL    |       |
+| NAME    | varchar(20) | NO   |     | NULL    |       |
+| AGE     | int(11)     | YES  |     | NULL    |       |
+| GENDER  | char(1)     | YES  |     | M       |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+EXPERIMENT 6
+
+mysql> ALTER TABLE EMPLOYEE RENAME TO PERSON;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> DESC PERSON;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int(11)     | YES  | MUL | NULL    |       |
+| NAME     | varchar(40) | YES  |     | NULL    |       |
+| CITY     | varchar(30) | YES  |     | NULL    |       |
+| DOB      | int(11)     | YES  |     | NULL    |       |
+| ADHAR_NO | int(30)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+EXPERIMENT 7
+
+mysql> DROP TABLE EMP1;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> DESC EMP1;
+ERROR 1146 (42S02): Table 'anand.EMP1' doesn't exist
+
+
+
