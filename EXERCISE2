@@ -1,4 +1,4 @@
-EXPERIMENT 1
+EXPERIMENT 2
 
 mysql> ALTER TABLE EMPLOYEE ADD SSN INT FIRST;
 Query OK, 0 rows affected (0.70 sec)
@@ -117,3 +117,4 @@ ERROR 1146 (42S02): Table 'anand.EMP1' doesn't exist
 
 
 
+//add questions
