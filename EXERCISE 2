@@ -139,3 +139,5 @@ Query OK, 0 rows affected (0.11 sec)
 mysql> DESC EMP1;
 ERROR 1146 (42S02): Table 'anand.EMP1' doesn't exist
 
+
+//VERIFIED
