@@ -50,7 +50,7 @@ mysql> SELECT * FROM  CUSTOMER;
 +----+-------+-------------+----------+---------+
 7 rows in set (0.00 sec)
 
-mysql> UPDATE CUSTOMER SET CITY='KOZHIKODE' WHERE ID=4;
+mysql> UPDATE CUSTOMER SET CITY='KOZHIKODE' WHERE ID=4; //WRONG
 Query OK, 1 row affected (0.04 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
@@ -170,4 +170,4 @@ mysql> SELECT * FROM INVOICE_ITEM;
 
 
 
-
+// CORRECTION
