@@ -183,7 +183,7 @@ mysql> SELECT * FROM CUSTOMER ORDER BY NAME DESC;
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 10)Display the customer details sorted in ascending by city and descending by names. 
 
-mysql> SELECT * FROM CUSTOMER ORDER BY CITY ASC;
+mysql> SELECT * FROM CUSTOMER ORDER BY CITY ASC; //WRONG
 +----+----------+----------------+-----------+----------+
 | ID | NAME     | ADDRESS        | CITY      | PH_NO    |
 +----+----------+----------------+-----------+----------+
@@ -284,7 +284,7 @@ mysql> SELECT NAME FROM CUSTOMER WHERE NAME LIKE 'A__%';
 
 
 
-
+//CORRECTION
 
 
 
