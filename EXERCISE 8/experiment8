@@ -1,0 +1,102 @@
+                                                                                                    EXPERIMENT 8--SUB QUERY --(DATE-11/05/2022)
+                                                                                                    ------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1)List the customer names of invoice date 3rd February 2022
+
+mysql> SELECT NAME FROM CUSTOMER WHERE ID IN (SELECT CUST_ID FROM INVOICE_MASTER WHERE INV_DATE='2022-02-03');
++-------+
+| NAME  |
++-------+
+| ASWIN |
++-------+
+1 row in set (0.02 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2)List the product name and price of each invoice item.
+
+mysql> SELECT PNAME,PRICE FROM PRODUCT WHERE PID IN (SELECT PID FROM INVOICE_ITEM);
++------------+-------+
+| PNAME      | PRICE |
++------------+-------+
+| HORLICKS   |   204 |
+| BONVITA    |   235 |
+| CORNFLAKES |    82 |
++------------+-------+
+3 rows in set (0.03 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3)List the product names, only include their purchased quantity more than 3.
+
+mysql> SELECT PNAME FROM PRODUCT WHERE PID IN (SELECT PID FROM INVOICE_ITEM WHERE QUANTITY >3);
++------------+
+| PNAME      |
++------------+
+| BONVITA    |
+| CORNFLAKES |
+| HORLICKS   |
++------------+
+3 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4)Find the product that has no sale. 
+
+mysql> SELECT PNAME FROM PRODUCT WHERE PID NOT IN (SELECT PID FROM INVOICE_ITEM );
++---------+
+| PNAME   |
++---------+
+| BOOST   |
+| COMPLAN |
+| SOAP    |
++---------+
+3 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5) List the customer names who purchased the items ‘pen’ and ‘pencil’. 
+
+SELECT NAME FROM CUSTOMER WHERE ID IN (SELECT CUST_ID FROM INVOICE_MASTER WHERE INV_ID IN (SELECT PID FROM INVOICE_ITEM WHERE PID IN(SELECT PID FROM PRODUCT WHERE PNAME='PEN' OR (SELECT PID FROM PRODUCT WHERE PNAME='PENCIL'))));
++-------+
+| NAME  |
++-------+
+| ABIN  |
+| ASWIN |
++-------+
+2 rows in set (0.00 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6)Display the purchased product details of the customer ’ASWIN’.
+
+mysql> SELECT PNAME FROM PRODUCT WHERE PID IN (SELECT PID FROM INVOICE_ITEM WHERE  INV_ID IN (SELECT INV_ID FROM INVOICE_MASTER WHERE CUST_ID IN (SELECT ID FROM CUSTOMER WHERE NAME='ASWIN')));
++------------+
+| PNAME      |
++------------+
+| PEN        |
+| PENCIL     |
+| CORNFLAKES |
++------------+
+3 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7)List the names of all customers who have purchased at least 2 products, make sure that no duplicate names in the result.
+
+mysql> SELECT NAME FROM CUSTOMER WHERE ID IN (SELECT CUST_ID FROM INVOICE_MASTER WHERE INV_ID IN (SELECT INV_ID FROM INVOICE_ITEM GROUP BY INV_ID HAVING COUNT(INV_ID)>=2));
++-------+
+| NAME  |
++-------+
+| ASWIN |
++-------+
+1 row in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
