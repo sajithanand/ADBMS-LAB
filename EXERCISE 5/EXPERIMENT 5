@@ -175,7 +175,7 @@ mysql> SELECT * FROM STUDENT;
 +---------+---------+-----+--------+
 5 rows in set (0.00 sec)
 
-mysql> DELETE  FROM STUDENT WHERE AGE=22;
+mysql> DELETE  FROM STUDENT WHERE AGE=22; //WRONG
 Query OK, 5 rows affected (0.04 sec)
 
 mysql> SELECT * FROM STUDENT;
@@ -277,4 +277,4 @@ mysql> SELECT * FROM INVOICE_ITEM;
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
+//CORRECTION
