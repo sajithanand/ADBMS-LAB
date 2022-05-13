@@ -80,7 +80,7 @@ mysql> SELECT PNAME FROM PRODUCT WHERE PID IN (SELECT PID FROM INVOICE_ITEM WHER
 
 7)List the names of all customers who have purchased at least 2 products, make sure that no duplicate names in the result.
 
-mysql> SELECT DISTINCT NAME FROM CUSTOMER WHERE ID IN (SELECT CUST_ID FROM INVOICE_MASTER WHERE INV_ID IN (SELECT INV_ID FROM INVOICE_ITEM GROUP BY INV_ID HAVING COUNT(INV_ID)>=2));
+mysql> SELECT NAME FROM CUSTOMER WHERE ID IN (SELECT CUST_ID FROM INVOICE_MASTER WHERE INV_ID IN (SELECT INV_ID FROM INVOICE_ITEM GROUP BY INV_ID HAVING COUNT(INV_ID)>=2));
 +-------+
 | NAME  |
 +-------+
@@ -91,7 +91,7 @@ mysql> SELECT DISTINCT NAME FROM CUSTOMER WHERE ID IN (SELECT CUST_ID FROM INVOI
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-//VERIFIED
+
 
 
 
