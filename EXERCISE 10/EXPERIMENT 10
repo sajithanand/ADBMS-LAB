@@ -27,7 +27,7 @@ mysql> CREATE VIEW INVOICE_PRODUCTS AS SELECT CUSTOMER.NAME,INVOICE_MASTER.INV_I
  INVOICE_MASTER ON CUSTOMER.ID=INVOICE_MASTER.CUST_ID LEFT JOIN INVOICE_ITEM ON INVOICE_MASTER.INV_ID=INVOICE_ITEM.INV_ID;
 Query OK, 0 rows affected (0.04 sec)
 
-mysql> SELECT * FROM INVOICE_PRODUCTS;
+mysql> SELECT * FROM INVOICE_PRODUCTS; //WRONG
 +----------+--------+------+----------+
 | NAME     | INV_ID | PID  | QUANTITY |
 +----------+--------+------+----------+
@@ -50,5 +50,5 @@ mysql> SELECT * FROM INVOICE_PRODUCTS;
 +----------+--------+------+----------+
 16 rows in set (0.03 sec)
 
-
+//CORRECTION
 
