@@ -10,7 +10,7 @@
 
 
 
-
+????
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 2)Display product details with an updated price amount(new price= old price+5rs)
@@ -57,6 +57,6 @@ mysql> SELECT PNAME FROM PRODUCT WHERE PID IN (SELECT PID FROM INVOICE_ITEM WHER
 
 
 
-
+//INCOMPLETE
 
 
