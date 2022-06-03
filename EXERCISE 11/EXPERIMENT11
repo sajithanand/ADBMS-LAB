@@ -1,0 +1,97 @@
+                                                                                              Experiment No: 11-- OPERATORS--(DATE-18/05/2022)
+                                                                                           --------------------------------------------------------------------------------------------
+
+ Optimising database (Using Set, arithmetic, logical and special operators) 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1)Display customer_id,CITY  who lives 'EKM' and 'TVM'(using set operation)
+
+mysql> SELECT * FROM CUSTOMER;
++----+----------+----------------+-----------+-----------+
+| ID | NAME     | ADDRESS        | CITY      | PH_NO     |
++----+----------+----------------+-----------+-----------+
+|  1 | ARJUN    | OOTY           | KOZHIKODE | 111112222 |
+|  2 | ASWIN    | MUKKAM         | KANNUR    |  92812233 |
+|  3 | ABIN     | CHUNGAM        | THISSUR   |    984766 |
+|  4 | MANU     | KL12           | KOZHIKODE |   8123467 |
+|  6 | SHIBU    | KL17           | IDY       |   4567887 |
+|  7 | MAYAN    | MANASSREI      | EKM       |  82819612 |
+|  8 | SUGHUNAN | NIT            | TVM       |  92319618 |
+|  9 | NANU     | CHATHAMANGALAM | KOZHIKODE |      NULL |
+| 10 | MALU     | KOVALAM        | TVM       |     45692 |
+| 11 | ARCHANA  | KL18           | KOZHIKODE |   9468910 |
+| 12 | ARYA     | KL13           | KANNUR    |  88456712 |
+| 13 | MALIK    | KL13           | KANNUR    |  88456712 |
+| 14 | NANDU    | KL18           | KOZHIKODE |   8234412 |
+| 15 | SABU     | OOTY           | KOYILANDY |  11111799 |
++----+----------+----------------+-----------+-----------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT ID,CITY FROM CUSTOMER WHERE CITY='EKM' UNION SELECT ID,CITY FROM CUSTOMER WHERE CITY='TVM';
++----+------+
+| ID | CITY |
++----+------+
+|  7 | EKM  |
+|  8 | TVM  |
+| 10 | TVM  |
++----+------+
+3 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2)Display product details with an updated price amount(new price= old price+5rs)
+
+mysql> SELECT PID,PNAME,PRICE,price+5 AS 'NEW PRICE' FROM PRODUCT;
++-----+------------+-------+-----------+
+| PID | PNAME      | PRICE | NEW PRICE |
++-----+------------+-------+-----------+
+|   1 | PEN        |   204 |       209 |
+|   2 | HORLICKS   |   100 |       105 |
+|   3 | COMPLAN    |   122 |       127 |
+|   4 | PENCIL     |   235 |       240 |
+|   5 | CORNFLAKES |    82 |        87 |
+|   6 | SOAP       |    80 |        85 |
++-----+------------+-------+-----------+
+6 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3) Display customer details who doesn’t have phone number and lives in ‘Calicut’ city (use logical operators)
+
+mysql> SELECT * FROM CUSTOMER WHERE CITY='KOZHIKODE' AND PH_NO IS NULL ;
++----+------+----------------+-----------+-------+
+| ID | NAME | ADDRESS        | CITY      | PH_NO |
++----+------+----------------+-----------+-------+
+|  9 | NANU | CHATHAMANGALAM | KOZHIKODE |  NULL |
++----+------+----------------+-----------+-------+
+1 row in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4)   List the product names if it finds any records in the invoice items table has quantity =6 (use special operators)
+
+mysql> SELECT PNAME FROM PRODUCT WHERE PID IN (SELECT PID FROM INVOICE_ITEM WHERE QUANTITY=6);
++--------+
+| PNAME  |
++--------+
+| PENCIL |
++--------+
+1 row in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
