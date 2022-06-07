@@ -1,0 +1,151 @@
+                                                             Experiment No: 14-- PL/SQL PROGRAMS- STORED PROCEDURES--(DATE-07/06/2022)
+                                                           ----------------------------------------------------------------------------------------------------------------------------------                             
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1)Create a procedure to display all tables in the invoice database.
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE INVOIVE_LIST()
+    -> BEGIN
+    -> SELECT * FROM CUSTOMER;
+    -> SELECT * FROM INVOICE_ITEM;
+    -> SELECT * FROM INVOICE_MASTER;
+    -> SELECT * FROM PRODUCT;
+    -> END
+    -> //
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CALL INVOIVE_LIST()//
++----+----------+----------------+-----------+-----------+
+| ID | NAME     | ADDRESS        | CITY      | PH_NO     |
++----+----------+----------------+-----------+-----------+
+|  1 | ARJUN    | OOTY           | KOZHIKODE | 111112222 |
+|  2 | ASWIN    | MUKKAM         | KANNUR    |  92812233 |
+|  3 | ABIN     | CHUNGAM        | THISSUR   |    984766 |
+|  4 | MANU     | KL12           | KOZHIKODE |   8123467 |
+|  6 | SHIBU    | KL17           | IDY       |   4567887 |
+|  7 | MAYAN    | MANASSREI      | EKM       |  82819612 |
+|  8 | SUGHUNAN | NIT            | TVM       |  92319618 |
+|  9 | NANU     | CHATHAMANGALAM | KOZHIKODE |      NULL |
+| 10 | MALU     | KOVALAM        | TVM       |     45692 |
+| 11 | ARCHANA  | KL18           | KOZHIKODE |   9468910 |
+| 12 | ARYA     | KL13           | KANNUR    |  88456712 |
+| 13 | MALIK    | KL13           | KANNUR    |  88456712 |
+| 14 | NANDU    | KL18           | KOZHIKODE |   8234412 |
+| 15 | SABU     | OOTY           | KOYILANDY |  11111799 |
++----+----------+----------------+-----------+-----------+
+14 rows in set (0.00 sec)
+
++--------+------+----------+
+| INV_ID | PID  | QUANTITY |
++--------+------+----------+
+|      4 |    4 |        6 |
+|      5 |    5 |        7 |
+|      1 |    5 |       10 |
+|      4 |    1 |       10 |
++--------+------+----------+
+4 rows in set (0.00 sec)
+
++--------+---------+------------+
+| INV_ID | CUST_ID | INV_DATE   |
++--------+---------+------------+
+|      1 |       3 | 2022-01-11 |
+|      2 |       2 | 2022-01-01 |
+|      4 |       2 | 2022-01-31 |
+|      5 |       2 | 2022-02-04 |
+|      6 |       4 | 2022-03-31 |
+|      7 |       6 | 2022-03-22 |
++--------+---------+------------+
+6 rows in set (0.00 sec)
+
++-----+------------+-------+
+| PID | PNAME      | PRICE |
++-----+------------+-------+
+|   1 | PEN        |   204 |
+|   2 | HORLICKS   |   100 |
+|   3 | COMPLAN    |   122 |
+|   4 | PENCIL     |   235 |
+|   5 | CORNFLAKES |    82 |
+|   6 | SOAP       |    80 |
++-----+------------+-------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2)Create a procedure to find greatest of 3 numbers.
+
+mysql> create procedure largest_number(a int,b int,c int)
+    -> begin 
+    -> declare x,y,z int;
+    -> set x=a;
+    -> set y=b;
+    -> set z=c;
+    -> if a>b and a>c then
+    -> select x as 'largest number';
+    -> else if b>a and b>c then
+    -> select y as 'largest number';
+    -> else
+    ->  select z as 'largest number';     
+    -> end if;
+    -> end if;
+    -> end//
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call largest_number(20,10,5)//
++----------------+
+| largest number |
++----------------+
+|             20 |
++----------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3)Create a procedure to display invoice details of a particular customer.
+
+mysql> CREATE PROCEDURE INVOICE_DET()
+    -> BEGIN
+    ->  SELECT CUSTOMER.NAME,INVOICE_MASTER.INV_ID,INVOICE_MASTER.INV_DATE,INVOICE_ITEM.QUANTITY,PRODUCT.PNAME,PRODUCT.PRICE FROM PRODUCT         INNER JOIN INVOICE_ITEM ON PRODUCT.PID=INVOICE_ITEM.PID INNER JOIN INVOICE_MASTER ON INVOICE_ITEM.INV_ID=INVOICE_MASTER.INV_ID INNER JOIN CUSTOMER ON INVOICE_MASTER.CUST_ID=CUSTOMER.ID WHERE CUSTOMER.NAME='ASWIN';
+    -> END
+    -> //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CALL INVOICE_DET()//
++-------+--------+------------+----------+------------+-------+
+| NAME  | INV_ID | INV_DATE   | QUANTITY | PNAME      | PRICE |
++-------+--------+------------+----------+------------+-------+
+| ASWIN |      4 | 2022-01-31 |        6 | PENCIL     |   235 |
+| ASWIN |      5 | 2022-02-04 |        7 | CORNFLAKES |    82 |
+| ASWIN |      4 | 2022-01-31 |       10 | PEN        |   204 |
++-------+--------+------------+----------+------------+-------+
+3 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+

@@ -1,0 +1,98 @@
+                                                                                                 EXPERIMENT 13--TCL COMMANDS--  DATE-25/05/2022
+                                                                                                  ----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1) Commit
+
+mysql> SET AUTOCOMMIT=OFF;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE MARVEL(NAME VARCHAR(20),ADDRESS VARCHAR(10),AGE INT(2));
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> INSERT INTO MARVEL VALUES('SUPERMAN','US',30);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.03 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2)SAVE POINT
+
+mysql> SAVEPOINT A;
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> INSERT INTO MARVEL VALUES('SPYDERMAN','CANADA',24);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO MARVEL VALUES('CAPTAIN','HOLLAND',34);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT C;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO MARVEL VALUES('ANTMAN','LONDON',12);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SAVEPOINT D;
+Query OK, 0 rows affected (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3)ROLL BACK
+
+mysql> ROLLBACK TO D;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM MARVEL;
++-----------+---------+------+
+| NAME      | ADDRESS | AGE  |
++-----------+---------+------+
+| SUPERMAN  | US      |   30 |
+| SPYDERMAN | CANADA  |   24 |
+| CAPTAIN   | HOLLAND |   34 |
+| ANTMAN    | LONDON  |   12 |
++-----------+---------+------+
+4 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO C;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM MARVEL;
++-----------+---------+------+
+| NAME      | ADDRESS | AGE  |
++-----------+---------+------+
+| SUPERMAN  | US      |   30 |
+| SPYDERMAN | CANADA  |   24 |
+| CAPTAIN   | HOLLAND |   34 |
++-----------+---------+------+
+3 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM MARVEL;
++-----------+---------+------+
+| NAME      | ADDRESS | AGE  |
++-----------+---------+------+
+| SUPERMAN  | US      |   30 |
+| SPYDERMAN | CANADA  |   24 |
++-----------+---------+------+
+2 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
