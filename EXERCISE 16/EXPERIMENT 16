@@ -1,0 +1,82 @@
+                                                                                       Experiment No: 16--PL/SQL PROGRAMS – TRIGGERS--(DATE-08/06/2022)
+                                                                                      ---------------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1)Create a trigger to handle updates to the customer table. 
+
+mysql>  CREATE TRIGGER BACKUP
+    -> BEFORE UPDATE
+    -> ON CUSTOMER FOR EACH ROW
+    ->  BEGIN
+    -> INSERT INTO CUSTOMER_1
+    -> VALUES (OLD.ID,OLD.NAME,OLD.ADDRESS,OLD.CITY,OLD.PH_NO);
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> UPDATE CUSTOMER SET CITY='KOZHIKODE' WHERE ID=1;//
+    
+Query OK, 0 rows affected (0.07 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> SELECT * FROM CUSTOMER_1//
++------+-------+---------+-----------+-----------+
+| ID   | NAME  | ADDRESS | CITY      | PH_N0     |
++------+-------+---------+-----------+-----------+
+|    1 | ARJUN | OOTY    | KOZHIKODE | 111112222 |
++------+-------+---------+-----------+-----------+
+1 row in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2)Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
+
+mysql> CREATE TRIGGER PRODUCT_1
+    -> BEFORE INSERT ON PRODUCT
+    -> FOR EACH ROW
+    -> BEGIN 
+    -> IF NEW.PRICE <5 THEN
+    -> SET NEW.PRICE=10;
+    -> END IF;
+    -> END;
+    -> //
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> SELECT * FROM PRODUCT;//
+   
++-----+------------+-------+
+| PID | PNAME      | PRICE |
++-----+------------+-------+
+|   1 | PEN        |   204 |
+|   2 | HORLICKS   |   100 |
+|   3 | COMPLAN    |   122 |
+|   4 | PENCIL     |   235 |
+|   5 | CORNFLAKES |    82 |
+|   6 | SOAP       |    80 |
++-----+------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO PRODUCT VALUES(7,'BOOST',3)//
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM PRODUCT//
++-----+------------+-------+
+| PID | PNAME      | PRICE |
++-----+------------+-------+
+|   1 | PEN        |   204 |
+|   2 | HORLICKS   |   100 |
+|   3 | COMPLAN    |   122 |
+|   4 | PENCIL     |   235 |
+|   5 | CORNFLAKES |    82 |
+|   6 | SOAP       |    80 |
+|   7 | BOOST      |    10 |
++-----+------------+-------+
+7 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
