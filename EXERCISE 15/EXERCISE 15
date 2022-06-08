@@ -1,0 +1,36 @@
+                                                                       EXPERIMENT 15--PL/SQL PROGRAMS – FUNCTIONS---(DATE-
+                                                                      ---------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1) Create a function to calculate price_range(low, medium, high) of each product. If price<=5 indicate as low, upto 50 indicate as medium, and above as high.
+
+mysql> CREATE FUNCTION PRICESTATE(PRICE INT) RETURNS VARCHAR(10)
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE STATE VARCHAR(10);
+    -> IF PRICE<=5 THEN
+    -> SET STATE='LOW';
+    -> ELSEIF PRICE<=50 THEN
+    -> SET STATE='MEDIUM';
+    -> ELSEIF PRICE>50 THEN
+    -> SET STATE='HIGH';
+    ->  END IF;
+    -> RETURN(STATE);
+    -> END //
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> SELECT PNAME,PRICE,PRICESTATE(PRICE) AS 'STATE' FROM PRODUCT;//
++------------+-------+-------+
+| PNAME      | PRICE | STATE |
++------------+-------+-------+
+| PEN        |   204 | HIGH  |
+| HORLICKS   |   100 | HIGH  |
+| COMPLAN    |   122 | HIGH  |
+| PENCIL     |   235 | HIGH  |
+| CORNFLAKES |    82 | HIGH  |
+| SOAP       |    80 | HIGH  |
++------------+-------+-------+
+6 rows in set (0.03 sec)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
