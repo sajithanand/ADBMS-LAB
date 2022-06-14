@@ -1,0 +1,84 @@
+											Experiment No: 18- NoSQL- CRUD operations--DATE-14/06/2022
+                                                                                        -------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1)    Write a MongoDB query to create an INVOICE database and collections (CUSTOMER,PRODUCT) and its corresponding documents.
+
+> use invoice;
+switched to db invoice
+ db.customer.insertMany([{"name":"aswin","city":"valat",'ph_no':'984712190','age':'23'},{"name":"abin","city":"kunnamangalam",'ph_no':'80874712190','age':'22'},{"name":"junaid","city":"kuttipuram",'ph_no':'7322712190','age':'24'}])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("62a821d16c93fac6129a44b1"),
+		ObjectId("62a821d16c93fac6129a44b2"),
+		ObjectId("62a821d16c93fac6129a44b3")
+	]
+}
+
+
+> db.PORDUCT.insertMany([{"pname":"boost",'price':'200'},{"pname":"horlicks",'price':'150'},{"pname":"complan",'price':'100'},{"pname":"oats",'price':'80'}]);
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("62a8216e6c93fac6129a44aa"),
+		ObjectId("62a8216e6c93fac6129a44ab"),
+		ObjectId("62a8216e6c93fac6129a44ac"),
+		ObjectId("62a8216e6c93fac6129a44ad")
+	]
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2) Write a MongoDB query to find all documents from the collection CUSTOMER
+
+> db.customer.find().pretty()
+{
+	"_id" : ObjectId("62a821d16c93fac6129a44b1"),
+	"name" : "aswin",
+	"city" : "valat",
+	"ph_no" : "984712190",
+	"age" : "23"
+}
+{
+	"_id" : ObjectId("62a821d16c93fac6129a44b2"),
+	"name" : "abin",
+	"city" : "kunnamangalam",
+	"ph_no" : "80874712190",
+	"age" : "22"
+}
+{
+	"_id" : ObjectId("62a821d16c93fac6129a44b3"),
+	"name" : "junaid",
+	"city" : "kuttipuram",
+	"ph_no" : "7322712190",
+	"age" : "24"
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3)Write a MongoDB query to update the city in the collection CUSTOMER.
+
+ db.customer.update({"city":"valat"},{$set:{"city":"calicut"}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.customer.find();
+{ "_id" : ObjectId("62a821d16c93fac6129a44b1"), "name" : "aswin", "city" : "calicut", "ph_no" : "984712190", "age" : "23" }
+{ "_id" : ObjectId("62a821d16c93fac6129a44b2"), "name" : "abin", "city" : "kunnamangalam", "ph_no" : "80874712190", "age" : "22" }
+{ "_id" : ObjectId("62a821d16c93fac6129a44b3"), "name" : "junaid", "city" : "kuttipuram", "ph_no" : "7322712190", "age" : "24" }
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4)  Write a MongoDB query to delete the first matched document whose city is “Calicut”.
+
+ db.customer.deleteOne({"city":"calicut"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.customer.find();
+{ "_id" : ObjectId("62a821d16c93fac6129a44b2"), "name" : "abin", "city" : "kunnamangalam", "ph_no" : "80874712190", "age" : "22" }
+{ "_id" : ObjectId("62a821d16c93fac6129a44b3"), "name" : "junaid", "city" : "kuttipuram", "ph_no" : "7322712190", "age" : "24" }
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
