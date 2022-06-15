@@ -1,0 +1,90 @@
+								                        Experiment No: 21- NoSQL – ADMINISTRATION --DATE-14/06/2022
+                                                                                        ----------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1)Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database.
+
+  db.createUser(
+... {
+...  user:"CUSTOMER1",
+... pwd:"1234",
+...  roles:[{role:"read",
+... db:"invoice"}
+... ]
+... }
+... )
+Successfully added user: {
+	"user" : "CUSTOMER1",
+	"roles" : [
+		{
+			"role" : "read",
+			"db" : "invoice"
+		}
+	]
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2)Write a MongoDB query to create the backup for the INVOICE database.
+
+ksb@ksb-Lenovo-Product:~$ sudo mkdir /vr/backups/mongobackups
+[sudo] password for ksb: 
+ksb@ksb-Lenovo-Product:~$ sudo mkdir /va\r/backups/mongobackups
+ksb@ksb-Lenovo-Product:~$ sudo mongodump --db invoice --out /var/backups/mongobackups
+2022-06-15T14:36:07.167+0530	writing invoice.PORDUCT to /var/backups/mongobackups/invoice/PORDUCT.bson
+2022-06-15T14:36:07.168+0530	writing invoice.customer to /var/backups/mongobackups/invoice/customer.bson
+2022-06-15T14:36:07.197+0530	done dumping invoice.customer (6 documents)
+2022-06-15T14:36:07.216+0530	done dumping invoice.PORDUCT (8 documents)
+2022-06-15T14:36:07.219+0530	writing invoice.CUSTOMER to /var/backups/mongobackups/invoice/CUSTOMER.bson
+2022-06-15T14:36:07.219+0530	done dumping invoice.CUSTOMER (12 documents)
+ksb@ksb-Lenovo-Product:~$ cd /var/backups/mongobackups
+ksb@ksb-Lenovo-Product:/var/backups/mongobackups$ ls -l
+total 4
+drwxr-xr-x 2 root root 4096 Jun 15 14:36 invoice
+ksb@ksb-Lenovo-Product:/var/backups/mongobackups$ cd invoice
+ksb@ksb-Lenovo-Product:/var/backups/mongobackups/invoice$ ls -l
+total 24
+-rw-r--r-- 1 root root  524 Jun 15 14:36 customer.bson
+-rw-r--r-- 1 root root 1108 Jun 15 14:36 CUSTOMER.bson
+-rw-r--r-- 1 root root  175 Jun 15 14:36 customer.metadata.json
+-rw-r--r-- 1 root root  175 Jun 15 14:36 CUSTOMER.metadata.json
+-rw-r--r-- 1 root root  438 Jun 15 14:36 PORDUCT.bson
+-rw-r--r-- 1 root root  174 Jun 15 14:36 PORDUCT.metadata.json
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3) Write a MongoDB query to restore a particular database or a collection.
+
+ use invoice
+switched to db invoice
+> db.dropDatabase()
+{ "dropped" : "invoice", "ok" : 1 }
+> ^C
+bye
+ksb@ksb-Lenovo-Product:/var/backups/mongobackups/invoice$ sudo mongorestore /var/backups/mongobackups
+2022-06-15T14:41:34.199+0530	preparing collections to restore from
+2022-06-15T14:41:34.200+0530	reading metadata for invoice.CUSTOMER from /var/backups/mongobackups/invoice/CUSTOMER.metadata.json
+2022-06-15T14:41:34.200+0530	reading metadata for invoice.PORDUCT from /var/backups/mongobackups/invoice/PORDUCT.metadata.json
+2022-06-15T14:41:34.200+0530	reading metadata for invoice.customer from /var/backups/mongobackups/invoice/customer.metadata.json
+2022-06-15T14:41:34.531+0530	restoring invoice.CUSTOMER from /var/backups/mongobackups/invoice/CUSTOMER.bson
+2022-06-15T14:41:34.543+0530	finished restoring invoice.CUSTOMER (12 documents, 0 failures)
+2022-06-15T14:41:34.619+0530	restoring invoice.customer from /var/backups/mongobackups/invoice/customer.bson
+2022-06-15T14:41:34.630+0530	finished restoring invoice.customer (6 documents, 0 failures)
+2022-06-15T14:41:34.680+0530	restoring invoice.PORDUCT from /var/backups/mongobackups/invoice/PORDUCT.bson
+2022-06-15T14:41:34.696+0530	finished restoring invoice.PORDUCT (8 documents, 0 failures)
+2022-06-15T14:41:34.696+0530	no indexes to restore for collection invoice.CUSTOMER
+2022-06-15T14:41:34.696+0530	no indexes to restore for collection invoice.customer
+2022-06-15T14:41:34.696+0530	no indexes to restore for collection invoice.PORDUCT
+2022-06-15T14:41:34.696+0530	26 document(s) restored successfully. 0 document(s) failed to restore.
+
+
+show dbs
+admin    0.000GB
+config   0.000GB
+invoice  0.000GB
+local    0.000GB
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
